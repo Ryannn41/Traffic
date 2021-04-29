@@ -61,6 +61,7 @@ public class Simulator implements ActionListener, Runnable, MouseListener {
     private JRadioButton westDirection = new JRadioButton("west");
     private JRadioButton eastDirection = new JRadioButton("east");
 
+
     private Simulator(){
 
         Map.roads.add(roadStart);
@@ -68,23 +69,6 @@ public class Simulator implements ActionListener, Runnable, MouseListener {
         frame.setLayout(new BorderLayout());
         frame.add(roadStart, BorderLayout.CENTER);
         roadStart.addMouseListener(this);
-
-        
-        //selections2.add(hasLight);
-        //selections2.add(noLight);
-
-        //selections3.add(northDirection);
-        //selections3.add(southDirection);
-        //selections3.add(eastDirection);
-        //selections3.add(westDirection);
-        
-    	
-        //buttons on the south side
-        south.setLayout(new GridLayout(1, 3));
-        addButton(south, startSim);
-        addButton(south, exitSim);
-        addButton(south, removeRoad);
-        
         
         //north side info
         north.setLayout(new GridLayout(1, 5));
@@ -93,33 +77,47 @@ public class Simulator implements ActionListener, Runnable, MouseListener {
         north.add(xPosField);
         north.add(labelYPosField);
         north.add(yPosField);
-        
+        frame.add(north, BorderLayout.NORTH);
+
+        //buttons on the south side
+        south.setLayout(new GridLayout(1, 3));
+        addButton(south, exitSim);
+        addButton(south, removeRoad);
+        frame.add(south, BorderLayout.SOUTH);
+
         //buttons on west side
-        west.setLayout(new GridLayout(13,1));        
+        west.setLayout(new GridLayout(13,1));
         addButton(west, addSedan);
         addButton(west, addBus);
         addButton(west, addRoad);
-        west.add(label);
+        west.add(label); 
         addButton(west, length);
-        
-        addButton(west, vertical);
-        addButton(west, horizontal);
-        addButton(west, hasLight);
-        addButton(west, noLight);
-        addButton(west, northDirection);
-        addButton(west, southDirection);
-        addButton(west, eastDirection);
-        addButton(west, westDirection);
-        
-        // add default selections
-        noLight.setSelected(true);
-        horizontal.setSelected(true);
-        northDirection.setEnabled(false);
-        southDirection.setEnabled(false);
-        eastDirection.setSelected(true);
 
-        frame.add(north, BorderLayout.NORTH);
-        frame.add(south, BorderLayout.SOUTH);
+        //radio buttons on west side
+        selections.add(vertical);
+        selections.add(horizontal);
+        addButton(west, vertical);       
+        horizontal.setSelected(true);       
+        addButton(west, horizontal);
+
+        selections2.add(hasLight);
+        selections2.add(noLight);
+        addButton(west, hasLight);
+        addButton(west, noLight);                
+        noLight.setSelected(true);
+
+        selections3.add(northDirection);
+        selections3.add(southDirection);
+        selections3.add(eastDirection);
+        selections3.add(westDirection);
+        addButton(west, northDirection);        
+        northDirection.setEnabled(false);
+        addButton(west, southDirection);        
+        southDirection.setEnabled(false);
+        addButton(west, eastDirection);        
+        eastDirection.setSelected(true);
+        addButton(west, westDirection);
+
         frame.add(west, BorderLayout.WEST);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
