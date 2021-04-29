@@ -81,9 +81,11 @@ public class Simulator implements ActionListener, Runnable, MouseListener {
 
         //buttons on the south side
         south.setLayout(new GridLayout(1, 3));
+        addButton(south, startSim);
         addButton(south, exitSim);
         addButton(south, removeRoad);
         frame.add(south, BorderLayout.SOUTH);
+
 
         //buttons on west side
         west.setLayout(new GridLayout(13,1));
