@@ -5,7 +5,7 @@ public class Car {
     private Road road; // road that the car is on
     protected int yPos; // current position on map
     protected int xPos; // current position on map
-    protected int  height;
+    protected int height;
     protected int width;
     public void paintMeHorizontal(Graphics g){
     }
@@ -13,8 +13,8 @@ public class Car {
     }
     Car(Road road){
         this.road = road;
-        yPos = getRoadCarIsOn().roadYPos;
-        xPos = getRoadCarIsOn().roadXPos;
+        yPos = getRoadCarIsOn().getRoadYPos();
+        xPos = getRoadCarIsOn().getRoadXPos();
     }
 
     public Road getRoadCarIsOn(){

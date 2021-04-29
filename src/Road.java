@@ -1,18 +1,28 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+* This class is for the road model
+* @author 
+* @version 
+*/
+
 public class Road extends JPanel{
     private TrafficLight light;
     private int numOfSegments; //length of road
     private final int roadWidth = 50;
-    final int roadYPos;
-    final int endRoadYPos;
-    final int roadXPos;
-    final int endRoadXPos;
+    private final int roadYPos;
+    private final int endRoadYPos;
+    private final int roadXPos;
+    private final int endRoadXPos;
     private Color lightColor = Color.green;
     private String orientation;
-    String trafficDirection;
-
+    private String trafficDirection;
+    
+    /**
+     * This method is for drawing road
+     * @param g for drawing components on
+     */
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         g.setColor(Color.GRAY);
@@ -45,8 +55,11 @@ public class Road extends JPanel{
             }
         }
     }
-
-    // paints traffic light
+    
+    /**
+     * This method is for paint traffic light
+     * @param g for drawing components on
+     */
     public void paintLight(Graphics g){
         g.setColor(lightColor);
         if(getOrientation().equals("horizontal")) {
@@ -73,7 +86,10 @@ public class Road extends JPanel{
             }
         }
     }
-
+    /**
+     * This method is for paint road
+     * @param g for drawing components on
+     */
     public void paintRoad(Graphics g){
         if(orientation.equals("horizontal")) {
             g.setColor(Color.black);
@@ -140,4 +156,5 @@ public class Road extends JPanel{
     }
 
 }
+
 
