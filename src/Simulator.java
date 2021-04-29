@@ -95,22 +95,21 @@ public class Simulator implements ActionListener, Runnable, MouseListener {
         north.add(yPosField);
         
         //buttons on west side
-        west.setLayout(new GridLayout(13,1));
-        west.add(label);
-        
-        addButton(west, length);
+        west.setLayout(new GridLayout(13,1));        
         addButton(west, addSedan);
         addButton(west, addBus);
         addButton(west, addRoad);
+        west.add(label);
+        addButton(west, length);
+        
+        addButton(west, vertical);
+        addButton(west, horizontal);
         addButton(west, hasLight);
         addButton(west, noLight);
-        addButton(west, horizontal);
-        addButton(west, vertical);
         addButton(west, northDirection);
         addButton(west, southDirection);
         addButton(west, eastDirection);
         addButton(west, westDirection);
-
         
         // add default selections
         noLight.setSelected(true);
@@ -266,20 +265,6 @@ public class Simulator implements ActionListener, Runnable, MouseListener {
         y = e.getY();
         xPosField.setText(Integer.toString(getX()));
         yPosField.setText(Integer.toString(getY()));
-        
-        // make sure those buttons are not selected at the same time
-        if (hasLight.isSelected()) {
-        	noLight.setSelected(false);
-        }
-        if (noLight.isSelected()) {
-        	hasLight.setSelected(false);
-        }
-        if (vertical.isSelected()) {
-        	horizontal.setSelected(false);
-        }
-        if (horizontal.isSelected()) {
-        	vertical.setSelected(false);
-        }       
         
     }
     @Override
