@@ -4,6 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class Simulator implements ActionListener, Runnable, MouseListener {
@@ -11,7 +18,7 @@ public class Simulator implements ActionListener, Runnable, MouseListener {
     private boolean running = false;
     private JFrame frame = new JFrame("traffic sim");
     private TrafficLight light = new TrafficLight();
-    Road roadStart = new Road(6, "horizontal",0, 270, "east", light); // fixed starting road on map
+    private Road roadStart = new Road(6, "horizontal",0, 270, "east", light); // fixed starting road on map
     
     private int getX(){
         return x;
@@ -33,6 +40,10 @@ public class Simulator implements ActionListener, Runnable, MouseListener {
     private JButton exitSim = new JButton("exit");
     private JButton removeRoad = new JButton("remove last road");
     private Container south = new Container();
+    
+    //save & load button
+    private JButton saveSim = new JButton("save");
+    private JButton loadSim = new JButton("load");
 
     //west container
     private Container west = new Container();
@@ -61,6 +72,9 @@ public class Simulator implements ActionListener, Runnable, MouseListener {
     private JRadioButton westDirection = new JRadioButton("west");
     private JRadioButton eastDirection = new JRadioButton("east");
 
+    //selected road
+    //private Road selectedRoad;
+    
 
     private Simulator(){
 
@@ -81,11 +95,12 @@ public class Simulator implements ActionListener, Runnable, MouseListener {
 
         //buttons on the south side
         south.setLayout(new GridLayout(1, 3));
+        addButton(south, saveSim);
+        addButton(south, loadSim);
         addButton(south, startSim);
         addButton(south, exitSim);
         addButton(south, removeRoad);
         frame.add(south, BorderLayout.SOUTH);
-
 
         //buttons on west side
         west.setLayout(new GridLayout(13,1));
@@ -165,6 +180,19 @@ public class Simulator implements ActionListener, Runnable, MouseListener {
             northDirection.setEnabled(true);
             southDirection.setEnabled(true);
         }
+        
+        // option for saving the map
+        if(source == saveSim){
+        	JsonWriter writer = new JsonWriter();
+        	writer.saveToFile();      	
+        }
+        
+        // option for loading the saved map
+        if(source == loadSim){
+            JsonReader reader = new JsonReader(frame, roadStart);
+            reader.readFile();
+        }
+        
         if(source == startSim){
             if(!running) {
                 running = true;
@@ -181,6 +209,7 @@ public class Simulator implements ActionListener, Runnable, MouseListener {
         if(source == addBus){
             Bus bus = new Bus(roadStart);
             Map.cars.add(bus);
+            
             for (int x = roadStart.getRoadXPos(); x < bus.getRoadCarIsOn().getRoadLength()*50; x = x + 30) {
                 bus.setCarXPosition(x);
                 bus.setCarYPosition(bus.getRoadCarIsOn().getRoadYPos()+5);
@@ -266,9 +295,40 @@ public class Simulator implements ActionListener, Runnable, MouseListener {
         xPosField.setText(Integer.toString(getX()));
         yPosField.setText(Integer.toString(getY()));
         
+        // for selecting road
+        /*
+        for (Road road:Map.roads) {
+        	if (x <= road.getEndRoadXPos() && 
+        	    x >= road.getRoadXPos() &&
+        	    y <= road.getEndRoadYPos() && 
+        	    y >= road.getRoadXPos()) {
+        		this.selectedRoad = road;
+        		break;
+        	}
+        	selectedRoad = null;
+        }
+        */
+        
     }
     @Override
-    public void mousePressed(MouseEvent e){}
+    public void mousePressed(MouseEvent e){
+    	
+    	/*
+        x = e.getX();
+        y = e.getY();
+        xPosField.setText(Integer.toString(getX()));
+        yPosField.setText(Integer.toString(getY()));
+    	
+    	if(selectedRoad != null) {
+            for (Road road:Map.roads) {
+            	if (road == selectedRoad) {
+            		road.updateRoadXPos(e.getX());
+            		road.updateRoadYPos(e.getY());
+            	}
+            }
+    	}
+    	*/
+    }
 
     @Override
     public void mouseReleased(MouseEvent e){}
