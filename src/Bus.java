@@ -13,4 +13,11 @@ public class Bus extends Car {
     public void paintMeVertical(Graphics g){
         g.setColor(Color.GREEN);
         g.fillRect(yPos, xPos, height, width);
-    }}
+    }
+    
+    @Override
+    public String getCarType() {
+    	return "Bus";
+    }
+}
+    

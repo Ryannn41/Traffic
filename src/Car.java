@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Car {
+public class Car{
     private Road road; // road that the car is on
     protected int yPos; // current position on map
     protected int xPos; // current position on map
@@ -234,5 +234,10 @@ public class Car {
         }
 
     }
+    
+    // method for override
+    public String getCarType() {
+		return null;
+	}
 
 }

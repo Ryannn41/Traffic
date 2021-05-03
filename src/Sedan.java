@@ -14,4 +14,9 @@ public class Sedan extends Car{
         g.setColor(Color.CYAN);
         g.fillRect(yPos, xPos, height, width);
     }
+    
+    @Override
+    public String getCarType() {
+		return "Sedan";
+	}
 }
