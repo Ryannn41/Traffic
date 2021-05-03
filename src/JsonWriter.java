@@ -12,7 +12,7 @@ public class JsonWriter {
         JSONArray objectList = new JSONArray();
         
         // create a copy of road on the map to save, drop the start road
-        ArrayList<Road> roadRecord = Map.roads;
+        ArrayList<Road> roadRecord = (ArrayList<Road>) Map.roads.clone();
         roadRecord.remove(0);
 
         if (!Map.roads.isEmpty()) {
